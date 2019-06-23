@@ -28,3 +28,13 @@ resource "aws_instance" "hello-world" {
   security_groups = [aws_security_group.allow_8000.name]
   user_data = file("userdata.sh")
 }
+
+resource "aws_s3_bucket" "private-bucket" {
+  bucket = "secret-images"
+  acl    = "private"
+
+  tags = {
+    Name        = "Secret images"
+    Environment = "Dev"
+  }
+}
